@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ADIDAS — Adizero EVO SL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700;900&family=Barlow:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="cur-dot"></div>
+<div id="cur-ring"></div>
+<div id="wipe"></div>
+<div class="bg-base" id="bgBase"></div>
+<div class="bg-mesh" id="bgMesh"></div>
+<div class="bg-grid"></div>
+<div class="bg-noise"></div>
+<div class="bg-lines"><span></span><span></span><span></span><span></span><span></span></div>
+
+<div class="page">
+
+  <header>
+    <div class="logo-mark">
+      <div class="logo-stripes">
+        <svg viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 18 L7 4 L8.5 4 L1.5 18 Z"/>
+          <path d="M6.5 18 L13.5 4 L15 4 L8 18 Z"/>
+          <path d="M13 18 L20 4 L21.5 4 L14.5 18 Z"/>
+        </svg>
+      </div>
+      <div class="logo-text">ADIDAS</div>
+    </div>
+
+    <div class="header-model">Adizero EVO SL</div>
+
+    <div class="header-right">
+      <div class="header-tag" id="headerTag">Corrida de Performance</div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Alternar claro/escuro" title="Modo claro / escuro">
+        <div class="theme-knob">
+          <svg class="icon-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3a7 7 0 0 0 9.79 9.79z" stroke="#fff" stroke-width="2" fill="none" stroke-linejoin="round"/></svg>
+          <svg class="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5" stroke="#fff" stroke-width="2"/>
+            <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <div class="main">
+    <div class="left">
+      <div class="eyebrow" id="eyebrow">Performance Running — 2025</div>
+      <h1><span class="line1">ADIZERO</span><span class="line2" id="h1Line2">EVO SL</span></h1>
+      <div class="shoe-colors-label" id="colorLabel">Court Green / Lucid Red / Cloud White</div>
+      <div class="color-pills" id="colorPills"></div>
+      <p class="desc" id="shoeDesc">Leveza extrema e resposta máxima para quem não aceita limites. A tecnologia Lightstrike PRO entrega amortecimento sem compromisso no peso — cada grama pensada para você cruzar a linha primeiro.</p>
+      <div class="price-row">
+        <span class="price-currency">R$</span>
+        <span class="price-value">1.200</span>
+        <span class="price-installment">ou 12× de R$100</span>
+      </div>
+      <div class="selector-wrap">
+        <div class="selector-label">Escolha o modelo</div>
+        <div class="selector" id="selector"></div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="shoe-stage">
+        <div class="shoe-img-wrap">
+          <img class="shoe-img" id="shoeImg" src="tenis1.png" alt="Adizero EVO SL" draggable="false"/>
+        </div>
+        <div class="shoe-shadow-el" id="shoeShadow"></div>
+        <div class="shoe-num" id="shoeNum">01</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-info">
+    <div class="fi-left">
+      <strong id="fiThemeName">Nature Run</strong>
+      Adizero EVO SL · Originals 2025
+    </div>
+    <div class="fi-right">
+      <div class="fi-stat"><div class="fi-stat-num">195g</div><div class="fi-stat-lbl">Peso</div></div>
+      <div class="fi-stat"><div class="fi-stat-num">6mm</div><div class="fi-stat-lbl">Drop</div></div>
+      <div class="fi-stat"><div class="fi-stat-num">37–46</div><div class="fi-stat-lbl">Numeração</div></div>
+    </div>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
