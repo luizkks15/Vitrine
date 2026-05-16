@@ -1,4 +1,3 @@
-
 const shoes = [
   {
     id:1, sceneName:'Nature Run',
@@ -63,6 +62,7 @@ const shoes = [
 ];
 
 let current = 0, animLocked = false, isLight = false;
+
 
 function drawTricolorCanvas(canvas, c1, c2, c3) {
   const ctx = canvas.getContext('2d');
@@ -130,8 +130,12 @@ function applyCSS(shoe) {
   document.getElementById('bgMesh').style.background =
     `radial-gradient(ellipse 65% 65% at 72% 58%,${glow} 0%,transparent 100%),
      radial-gradient(ellipse 40% 40% at 18% 78%,${glow} 0%,transparent 100%)`;
-  document.getElementById('shoeShadow').style.background =
-    `radial-gradient(ellipse,${shad} 0%,transparent 70%)`;
+
+  
+  ['shoeShadow','shoeShadowMobile'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.style.background = `radial-gradient(ellipse,${shad} 0%,transparent 70%)`;
+  });
 }
 
 
@@ -140,13 +144,12 @@ function updateTexts(shoe) {
   document.getElementById('shoeDesc').textContent    = shoe.desc;
   document.getElementById('headerTag').textContent   = shoe.sceneName;
   document.getElementById('fiThemeName').textContent = shoe.sceneName;
-  document.getElementById('shoeNum').textContent     = String(shoe.id).padStart(2,'0');
+  const numEl = document.getElementById('shoeNum');
+  if(numEl) numEl.textContent = String(shoe.id).padStart(2,'0');
   updatePills(shoe);
 }
 
-
-function updateImage(shoe, instant) {
-  const img = document.getElementById('shoeImg');
+function animateImg(img, newSrc, instant) {
   const REST = 'rotate(-4deg) translateY(0px)';
 
   const showImg = () => {
@@ -161,7 +164,7 @@ function updateImage(shoe, instant) {
     img.style.transition = 'none';
     img.style.opacity = '0';
     img.style.transform = REST;
-    img.src = shoe.imgSrc;
+    img.src = newSrc;
     if (img.complete && img.naturalWidth > 0) {
       requestAnimationFrame(()=>requestAnimationFrame(showImg));
     } else {
@@ -171,14 +174,13 @@ function updateImage(shoe, instant) {
     return;
   }
 
-
   img.classList.remove('do-float');
   img.style.transition = 'opacity 0.25s, transform 0.25s';
   img.style.opacity = '0';
   img.style.transform = 'rotate(-4deg) translateY(12px)';
 
   setTimeout(()=>{
-    img.src = shoe.imgSrc;
+    img.src = newSrc;
     img.style.transform = 'rotate(-4deg) translateY(-8px)';
     const show = () => {
       img.style.transition = 'opacity 0.38s, transform 0.38s';
@@ -189,6 +191,14 @@ function updateImage(shoe, instant) {
     if (img.complete && img.naturalWidth > 0) { requestAnimationFrame(show); }
     else { img.onload = show; img.onerror = show; }
   }, 270);
+}
+
+
+function updateImage(shoe, instant) {
+  const imgDesktop = document.getElementById('shoeImg');
+  const imgMobile  = document.getElementById('shoeImgMobile');
+  if(imgDesktop) animateImg(imgDesktop, shoe.imgSrc, instant);
+  if(imgMobile)  animateImg(imgMobile,  shoe.imgSrc, instant);
 }
 
 
@@ -212,7 +222,6 @@ function selectShoe(idx) {
   setTimeout(()=>{ animLocked = false; }, 750);
 }
 
-
 document.getElementById('themeToggle').addEventListener('click', ()=>{
   isLight = !isLight;
   document.documentElement.setAttribute('data-theme', isLight?'light':'dark');
@@ -220,13 +229,16 @@ document.getElementById('themeToggle').addEventListener('click', ()=>{
 });
 
 
-const dot = document.getElementById('cur-dot');
+const dot  = document.getElementById('cur-dot');
 const ring = document.getElementById('cur-ring');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
-(function loop(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
-document.addEventListener('mouseover', e=>{ if(e.target.closest('button,a,.shoe-btn')){ ring.style.width='50px'; ring.style.height='50px'; ring.style.opacity='0.85'; }});
-document.addEventListener('mouseout',  e=>{ if(e.target.closest('button,a,.shoe-btn')){ ring.style.width='34px'; ring.style.height='34px'; ring.style.opacity='0.55'; }});
+if(dot && ring) {
+  let mx=0,my=0,rx=0,ry=0;
+  document.addEventListener('mousemove', e=>{ mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+  (function loop(){ rx+=(mx-rx)*0.13; ry+=(my-ry)*0.13; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+  document.addEventListener('mouseover', e=>{ if(e.target.closest('button,a,.shoe-btn')){ ring.style.width='50px'; ring.style.height='50px'; ring.style.opacity='0.85'; }});
+  document.addEventListener('mouseout',  e=>{ if(e.target.closest('button,a,.shoe-btn')){ ring.style.width='34px'; ring.style.height='34px'; ring.style.opacity='0.55'; }});
+}
+
 
 buildSelector();
 applyCSS(shoes[0]);
